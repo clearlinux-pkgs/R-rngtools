@@ -4,7 +4,7 @@
 #
 Name     : R-rngtools
 Version  : 1.3.1
-Release  : 15
+Release  : 16
 URL      : https://cran.r-project.org/src/contrib/rngtools_1.3.1.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/rngtools_1.3.1.tar.gz
 Summary  : Utility Functions for Working with Random Number Generators
@@ -14,14 +14,11 @@ Requires: R-RUnit
 Requires: R-pkgmaker
 BuildRequires : R-RUnit
 BuildRequires : R-pkgmaker
-BuildRequires : clr-R-helpers
+BuildRequires : buildreq-R
 
 %description
-Random Number Generators (RNGs). In particular, a generic
-    S4 framework is defined for getting/setting the current RNG, or RNG data
-    that are embedded into objects for reproducibility.
-    Notably, convenient default methods greatly facilitate the way current
-    RNG settings can be changed.
+[![Build Status](https://travis-ci.org/renozao/rngtools.png?branch=master)](https://travis-ci.org/renozao/rngtools)
+[![codecov](https://codecov.io/gh/renozao/rngtools/branch/master/graph/badge.svg)](https://codecov.io/gh/renozao/rngtools)
 
 %prep
 %setup -q -c -n rngtools
@@ -31,11 +28,11 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1526565430
+export SOURCE_DATE_EPOCH=1552864844
 
 %install
+export SOURCE_DATE_EPOCH=1552864844
 rm -rf %{buildroot}
-export SOURCE_DATE_EPOCH=1526565430
 export LANG=C
 export CFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
 export FCFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
@@ -53,9 +50,9 @@ echo "FFLAGS = $FFLAGS -march=haswell -ftree-vectorize " >> ~/.R/Makevars
 echo "CXXFLAGS = $CXXFLAGS -march=haswell -ftree-vectorize " >> ~/.R/Makevars
 R CMD INSTALL --install-tests --built-timestamp=${SOURCE_DATE_EPOCH} --build  -l %{buildroot}/usr/lib64/R/library rngtools
 for i in `find %{buildroot}/usr/lib64/R/ -name "*.so"`; do mv $i $i.avx2 ; mv $i.avx2 ~/.stash/; done
-echo "CFLAGS = $CFLAGS -march=skylake-avx512 -ftree-vectorize -mprefer-vector-width=512 " > ~/.R/Makevars
-echo "FFLAGS = $FFLAGS -march=skylake-avx512 -ftree-vectorize -mprefer-vector-width=512 " >> ~/.R/Makevars
-echo "CXXFLAGS = $CXXFLAGS -march=skylake-avx512 -ftree-vectorize -mprefer-vector-width=512  " >> ~/.R/Makevars
+echo "CFLAGS = $CFLAGS -march=skylake-avx512 -ftree-vectorize " > ~/.R/Makevars
+echo "FFLAGS = $FFLAGS -march=skylake-avx512 -ftree-vectorize " >> ~/.R/Makevars
+echo "CXXFLAGS = $CXXFLAGS -march=skylake-avx512 -ftree-vectorize " >> ~/.R/Makevars
 R CMD INSTALL --preclean --install-tests --no-test-load --built-timestamp=${SOURCE_DATE_EPOCH} --build  -l %{buildroot}/usr/lib64/R/library rngtools
 for i in `find %{buildroot}/usr/lib64/R/ -name "*.so"`; do mv $i $i.avx512 ; mv $i.avx512 ~/.stash/; done
 echo "CFLAGS = $CFLAGS -ftree-vectorize " > ~/.R/Makevars
@@ -70,8 +67,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export _R_CHECK_FORCE_SUGGESTS_=false
-R CMD check --no-manual --no-examples --no-codoc -l %{buildroot}/usr/lib64/R/library rngtools|| : 
-cp ~/.stash/* %{buildroot}/usr/lib64/R/library/*/libs/ || :
+R CMD check --no-manual --no-examples --no-codoc  rngtools || :
 
 
 %files
@@ -95,3 +91,7 @@ cp ~/.stash/* %{buildroot}/usr/lib64/R/library/*/libs/ || :
 /usr/lib64/R/library/rngtools/help/rngtools.rdx
 /usr/lib64/R/library/rngtools/html/00Index.html
 /usr/lib64/R/library/rngtools/html/R.css
+/usr/lib64/R/library/rngtools/tests/testthat.R
+/usr/lib64/R/library/rngtools/tests/testthat/test-RNG.r
+/usr/lib64/R/library/rngtools/tests/testthat/test-RNGseq.r
+/usr/lib64/R/library/rngtools/tests/testthat/test-format.R
