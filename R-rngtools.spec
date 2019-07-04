@@ -4,7 +4,7 @@
 #
 Name     : R-rngtools
 Version  : 1.4
-Release  : 22
+Release  : 23
 URL      : https://cran.r-project.org/src/contrib/rngtools_1.4.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/rngtools_1.4.tar.gz
 Summary  : Utility Functions for Working with Random Number Generators
@@ -12,23 +12,26 @@ Group    : Development/Tools
 License  : GPL-3.0
 Requires: R-RUnit
 Requires: R-bibtex
-Requires: R-cli
+Requires: R-digest
 Requires: R-pkgmaker
 Requires: R-registry
-Requires: R-withr
+Requires: R-stringr
 Requires: R-xtable
 BuildRequires : R-RUnit
 BuildRequires : R-bibtex
-BuildRequires : R-cli
+BuildRequires : R-digest
 BuildRequires : R-pkgmaker
 BuildRequires : R-registry
-BuildRequires : R-withr
+BuildRequires : R-stringr
 BuildRequires : R-xtable
 BuildRequires : buildreq-R
 
 %description
-[![Build Status](https://travis-ci.org/renozao/rngtools.png?branch=master)](https://travis-ci.org/renozao/rngtools)
-[![codecov](https://codecov.io/gh/renozao/rngtools/branch/master/graph/badge.svg)](https://codecov.io/gh/renozao/rngtools)
+Random Number Generators (RNGs). In particular, a generic
+    S4 framework is defined for getting/setting the current RNG, or RNG data
+    that are embedded into objects for reproducibility.
+    Notably, convenient default methods greatly facilitate the way current
+    RNG settings can be changed.
 
 %prep
 %setup -q -c -n rngtools
@@ -37,13 +40,13 @@ BuildRequires : buildreq-R
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1562035607
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1562210095
 
 %install
-export SOURCE_DATE_EPOCH=1562035607
+export SOURCE_DATE_EPOCH=1562210095
 rm -rf %{buildroot}
-export LANG=C
+export LANG=C.UTF-8
 export CFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
 export FCFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
 export FFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
@@ -72,7 +75,7 @@ R CMD INSTALL --preclean --install-tests --built-timestamp=${SOURCE_DATE_EPOCH} 
 cp ~/.stash/* %{buildroot}/usr/lib64/R/library/*/libs/ || :
 %{__rm} -rf %{buildroot}%{_datadir}/R/library/R.css
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
