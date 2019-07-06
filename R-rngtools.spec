@@ -4,34 +4,29 @@
 #
 Name     : R-rngtools
 Version  : 1.4
-Release  : 25
+Release  : 26
 URL      : https://cran.r-project.org/src/contrib/rngtools_1.4.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/rngtools_1.4.tar.gz
 Summary  : Utility Functions for Working with Random Number Generators
 Group    : Development/Tools
 License  : GPL-3.0
-Requires: R-RUnit
-Requires: R-bibtex
 Requires: R-digest
 Requires: R-pkgmaker
-Requires: R-registry
+Requires: R-stringi
 Requires: R-stringr
-Requires: R-xtable
 BuildRequires : R-RUnit
 BuildRequires : R-bibtex
 BuildRequires : R-digest
 BuildRequires : R-pkgmaker
 BuildRequires : R-registry
+BuildRequires : R-stringi
 BuildRequires : R-stringr
 BuildRequires : R-xtable
 BuildRequires : buildreq-R
 
 %description
-Random Number Generators (RNGs). In particular, a generic
-    S4 framework is defined for getting/setting the current RNG, or RNG data
-    that are embedded into objects for reproducibility.
-    Notably, convenient default methods greatly facilitate the way current
-    RNG settings can be changed.
+[![Build Status](https://travis-ci.org/renozao/rngtools.png?branch=master)](https://travis-ci.org/renozao/rngtools)
+[![codecov](https://codecov.io/gh/renozao/rngtools/branch/master/graph/badge.svg)](https://codecov.io/gh/renozao/rngtools)
 
 %prep
 %setup -q -c -n rngtools
@@ -41,10 +36,10 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1562210095
+export SOURCE_DATE_EPOCH=1562447520
 
 %install
-export SOURCE_DATE_EPOCH=1562210095
+export SOURCE_DATE_EPOCH=1562447520
 rm -rf %{buildroot}
 export LANG=C.UTF-8
 export CFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
