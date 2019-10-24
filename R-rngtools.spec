@@ -4,7 +4,7 @@
 #
 Name     : R-rngtools
 Version  : 1.4
-Release  : 26
+Release  : 27
 URL      : https://cran.r-project.org/src/contrib/rngtools_1.4.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/rngtools_1.4.tar.gz
 Summary  : Utility Functions for Working with Random Number Generators
@@ -12,7 +12,6 @@ Group    : Development/Tools
 License  : GPL-3.0
 Requires: R-digest
 Requires: R-pkgmaker
-Requires: R-stringi
 Requires: R-stringr
 BuildRequires : R-RUnit
 BuildRequires : R-bibtex
@@ -23,6 +22,7 @@ BuildRequires : R-stringi
 BuildRequires : R-stringr
 BuildRequires : R-xtable
 BuildRequires : buildreq-R
+BuildRequires : util-linux
 
 %description
 [![Build Status](https://travis-ci.org/renozao/rngtools.png?branch=master)](https://travis-ci.org/renozao/rngtools)
@@ -36,10 +36,10 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1562447520
+export SOURCE_DATE_EPOCH=1571894474
 
 %install
-export SOURCE_DATE_EPOCH=1562447520
+export SOURCE_DATE_EPOCH=1571894474
 rm -rf %{buildroot}
 export LANG=C.UTF-8
 export CFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
