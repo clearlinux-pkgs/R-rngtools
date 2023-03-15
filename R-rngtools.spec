@@ -4,7 +4,7 @@
 #
 Name     : R-rngtools
 Version  : 1.5.2
-Release  : 51
+Release  : 52
 URL      : https://cran.r-project.org/src/contrib/rngtools_1.5.2.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/rngtools_1.5.2.tar.gz
 Summary  : Utility Functions for Working with Random Number Generators
